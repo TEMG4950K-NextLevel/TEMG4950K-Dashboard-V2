@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import ListBulletIcon from '@heroicons/react/24/solid/ListBulletIcon';
+import PropTypes from "prop-types";
+import ListBulletIcon from "@heroicons/react/24/solid/ListBulletIcon";
 import {
   Avatar,
   Box,
@@ -8,12 +8,13 @@ import {
   LinearProgress,
   Stack,
   SvgIcon,
-  Typography
-} from '@mui/material';
+  Typography,
+} from "@mui/material";
 
 export const OverviewTasksProgress = (props) => {
   let { value, sx } = props;
-value = 12;
+  //maybe will need to connect to sth , not just a number
+  value = 12;
   return (
     <Card sx={sx}>
       <CardContent>
@@ -24,22 +25,16 @@ value = 12;
           spacing={3}
         >
           <Stack spacing={1}>
-            <Typography
-              color="text.secondary"
-              gutterBottom
-              variant="overline"
-            >
+            <Typography color="text.secondary" gutterBottom variant="overline">
               Task Progress
             </Typography>
-            <Typography variant="h4">
-              {value}%
-            </Typography>
+            <Typography variant="h4">{value}%</Typography>
           </Stack>
           <Avatar
             sx={{
-              backgroundColor: 'warning.main',
+              backgroundColor: "warning.main",
               height: 56,
-              width: 56
+              width: 56,
             }}
           >
             <SvgIcon>
@@ -48,10 +43,7 @@ value = 12;
           </Avatar>
         </Stack>
         <Box sx={{ mt: 3 }}>
-          <LinearProgress
-            value={value}
-            variant="determinate"
-          />
+          <LinearProgress value={value} variant="determinate" />
         </Box>
       </CardContent>
     </Card>
@@ -60,5 +52,5 @@ value = 12;
 
 OverviewTasksProgress.propTypes = {
   value: PropTypes.number.isRequired,
-  sx: PropTypes.object
+  sx: PropTypes.object,
 };
