@@ -26,7 +26,12 @@ const plans = [
 
 export default function App() {
   const [enabled, setEnabled] = useState(true);
+  const [isToggled, setIsToggled] = useState(false);
   const [selected, setSelected] = useState(plans[0]);
+
+  const handleToggleClick = () => {
+    setIsToggled(!isToggled); //flip heatmap
+  };
 
   return (
     <>
@@ -130,7 +135,8 @@ export default function App() {
               <Sidebar.ItemGroup>
                 <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                   <Sidebar.Collapse icon={HiChartPie} label="Dashboard">
-                    <Sidebar.Item href="#">Map options here?</Sidebar.Item>
+                    {/* adding more options. */}
+                    <Sidebar.Item href="#">Heatmap</Sidebar.Item>
                   </Sidebar.Collapse>
                 </div>
 
@@ -156,6 +162,7 @@ export default function App() {
                   <Switch
                     checked={enabled}
                     onChange={setEnabled}
+                    onClick={handleToggleClick}
                     className={`${enabled ? "bg-sky-900" : "bg-sky-700"}
           relative inline-flex h-[30px] w-[56px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
                   >
@@ -232,7 +239,8 @@ export default function App() {
 
         {/* <div className="p-4 sm:ml-64 relative v-screen h-screen"> */}
         <div className="mapbox__content">
-          <Map isOn={enabled} />
+          {/* props for toggling heatmap */}
+          <Map isToggled={isToggled} />
         </div>
         {/* </div> */}
       </div>

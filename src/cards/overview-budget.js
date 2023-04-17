@@ -14,9 +14,10 @@ import {
 export const OverviewBudget = (props) => {
   let { difference, positive = false, sx, value } = props;
 
+  //maybe will need to connect to sth , not just a number
   difference = 99;
   value = "420,500";
-  
+
   return (
     <Card sx={sx}>
       <CardContent>

@@ -11,6 +11,7 @@ import {
 
 export const OverviewTotalProfit = (props) => {
   let { value, sx } = props;
+  //maybe will need to connect to sth , not just a number
   value = -42142;
   return (
     <Card sx={sx}>
