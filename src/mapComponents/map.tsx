@@ -1,9 +1,5 @@
 import * as React from "react";
-import {
-  useState,
-  useMemo,
-  useEffect,
-} from "react";
+import { useState, useMemo, useEffect } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GeocoderControl from "./geocoder-control";
@@ -26,7 +22,6 @@ import { heatmapLayer } from "./map-style";
 
 import Pin from "./pin";
 import { Billboard } from "./pin";
-
 import CITIES from "./cities.json";
 
 const TOKEN =

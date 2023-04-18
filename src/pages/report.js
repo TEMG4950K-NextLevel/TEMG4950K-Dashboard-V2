@@ -12,29 +12,9 @@ import { OverviewTotalCustomers } from "../cards/overview-total-customers";
 import { OverviewTasksProgress } from "../cards/overview-tasks-progress";
 import { OverviewBudget } from "../cards/overview-budget";
 import Link from "next/link";
-import Report from "../reportComponents/reportComponent";
+import ReportComponent from "../reportComponents/reportComponent";
 
-const plans = [
-  {
-    name: "Income heatmap",
-  },
-  {
-    name: "Age heatmap",
-  },
-  {
-    name: "Gender heatmap",
-  },
-];
-
-export default function App() {
-  const [enabled, setEnabled] = useState(true);
-  const [isToggled, setIsToggled] = useState(false);
-  const [selected, setSelected] = useState(plans[0]);
-
-  const handleToggleClick = () => {
-    setIsToggled(!isToggled); //flip heatmap
-  };
-
+export default function Report() {
   return (
     <>
       <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700 drop-shadow-xl">
@@ -152,98 +132,11 @@ export default function App() {
           </Sidebar>
         </aside>
 
-        <aside
-          id="logo-sidebar"
-          className="flex flex-col fixed top-0 right-0 z-40 w-70 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700"
-          aria-label="Sidebar"
-        >
-          <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
-            <ul className="space-y-2 font-medium">
-              <li>
-                <div className="flex pl-3 items-center justify-self-center gap-3">
-                  <Switch
-                    checked={enabled}
-                    onChange={setEnabled}
-                    onClick={handleToggleClick}
-                    className={`${enabled ? "bg-sky-900" : "bg-sky-700"}
-          relative inline-flex h-[30px] w-[56px] shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
-                  >
-                    <span
-                      aria-hidden="true"
-                      className={`${enabled ? "translate-x-7" : "translate-x-0"}
-            pointer-events-none inline-block h-[26px] w-[26px] transform rounded-full bg-white shadow-lg ring-0 transition duration-200 ease-in-out`}
-                    />
-                  </Switch>
-                  <span className="">Toggle heatmap</span>
-                </div>
-              </li>
-            </ul>
-            <div className="w-full px-4 py-6">
-              <div className="mx-auto w-full max-w-md">
-                <RadioGroup value={selected} onChange={setSelected}>
-                  <RadioGroup.Label className="sr-only">
-                    Server size
-                  </RadioGroup.Label>
-                  <div className="space-y-2">
-                    {plans.map((plan) => (
-                      <RadioGroup.Option
-                        key={plan.name}
-                        value={plan}
-                        className={({ active, checked }) =>
-                          `${
-                            active
-                              ? "ring-2 ring-white ring-opacity-60 ring-offset-2 ring-offset-sky-300"
-                              : ""
-                          }
-                  ${
-                    checked ? "bg-sky-900 bg-opacity-75 text-white" : "bg-white"
-                  }
-                    relative flex cursor-pointer rounded-lg px-5 py-3 shadow-md focus:outline-none focus:ring-0 focus:ring-offset-0`
-                        }
-                      >
-                        {({ active, checked }) => (
-                          <>
-                            <div className="flex w-full items-center justify-between">
-                              <div className="flex items-center">
-                                <div className="text-sm">
-                                  <RadioGroup.Label
-                                    as="p"
-                                    className={`font-medium  ${
-                                      checked ? "text-white" : "text-gray-900"
-                                    }`}
-                                  >
-                                    {plan.name}
-                                  </RadioGroup.Label>
-                                </div>
-                              </div>
-                              {checked && (
-                                <div className="shrink-0 text-white">
-                                  <CheckIcon className="h-6 w-6" />
-                                </div>
-                              )}
-                            </div>
-                          </>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-            </div>
-            <div className="flex flex-col gap-y-4 box-border ">
-              <OverviewTotalProfit />
-              <OverviewTotalCustomers />
-              <OverviewTasksProgress />
-              <OverviewBudget />
-            </div>
-          </div>
-        </aside>
-
         {/* <div className="p-4 sm:ml-64 relative v-screen h-screen"> */}
-        <div className="mapbox__content">
-          {/* props for toggling heatmap */}
-          <Map isToggled={isToggled} />
+        <div className="p-4 sm:ml-64 mt-[50px] relative v-screen h-screen">
+          <ReportComponent />
         </div>
+
         {/* </div> */}
       </div>
     </>
