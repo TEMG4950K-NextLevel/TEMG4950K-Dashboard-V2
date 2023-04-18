@@ -3,18 +3,12 @@ import {
   useState,
   useMemo,
   useEffect,
-  useRef,
-  useCallback,
-  Fragment,
 } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GeocoderControl from "./geocoder-control";
-import type { MarkerDragEvent, LngLat, MapLayerMouseEvent } from "react-map-gl";
-import { Dialog, Transition } from "@headlessui/react";
-import { Slider, Button } from "antd";
+import { Slider } from "antd";
 
-import useContextMenu from "../hooks/use-context-menu";
 import ContextMenu from "./context-menu";
 
 import MapGL, {
@@ -34,6 +28,8 @@ import Pin from "./pin";
 import { Billboard } from "./pin";
 
 import CITIES from "./cities.json";
+
+const data = "../HKGS_Dataset_Land-Sale-Records_2023-03-21-1653-57_fullset.geojson"
 
 const TOKEN =
   "pk.eyJ1Ijoic29rdTE3IiwiYSI6ImNsZ2pjb3F2dDBtNWgzY212N21oMTR6dzkifQ.lPPlfpBi6oq78d8-_Gm0cA"; // Set your mapbox token here
@@ -149,29 +145,29 @@ export default function Map({ isToggled }) {
     setIsDeleteTriggered(false);
   };
 
-  useEffect(() => {
-    /* global fetch */
-    fetch("https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson")
-      .then((resp) => resp.json())
-      .then((json) => {
-        // Note: In a real application you would do a validation of JSON data before doing anything with it,
-        // but for demonstration purposes we ingore this part here and just trying to select needed data...
-        const features = json.features;
-        const endTime = features[0].properties.time;
-        const startTime = features[features.length - 1].properties.time;
+  // useEffect(() => {
+  //   /* global fetch */
+  //   fetch("https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson")
+  //     .then((resp) => resp.json())
+  //     .then((json) => {
+  //       // Note: In a real application you would do a validation of JSON data before doing anything with it,
+  //       // but for demonstration purposes we ingore this part here and just trying to select needed data...
+  //       const features = json.features;
+  //       const endTime = features[0].properties.time;
+  //       const startTime = features[features.length - 1].properties.time;
 
-        setTimeRange([startTime, endTime]);
-        setEarthQuakes(json);
-        selectTime(endTime);
-      })
-      .catch((err) => console.error("Could not load data", err)); // eslint-disable-line
-  }, []);
+  //       setTimeRange([startTime, endTime]);
+  //       setEarthQuakes(json);
+  //       selectTime(endTime);
+  //     })
+  //     .catch((err) => console.error("Could not load data", err)); // eslint-disable-line
+  // }, []);
 
-  const data = useMemo(() => {
-    return allDays
-      ? earthquakes
-      : filterFeaturesByDay(earthquakes, selectedTime);
-  }, [earthquakes, allDays, selectedTime]);
+  // const data = useMemo(() => {
+  //   return allDays
+  //     ? earthquakes
+  //     : filterFeaturesByDay(earthquakes, selectedTime);
+  // }, [earthquakes, allDays, selectedTime]);
 
   const pins = useMemo(
     () =>
