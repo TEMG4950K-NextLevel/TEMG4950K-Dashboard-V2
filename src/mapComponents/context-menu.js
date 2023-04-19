@@ -1,4 +1,4 @@
-import Map from "./map";
+import Map from "./Map";
 
 import { useState, useEffect } from "react";
 

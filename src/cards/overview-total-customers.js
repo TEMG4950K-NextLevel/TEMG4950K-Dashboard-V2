@@ -16,7 +16,7 @@ export const OverviewTotalCustomers = (props) => {
 
   //maybe will need to connect to sth , not just a number
   difference = 999;
-  value = "29041";
+  value = "290,410";
   return (
     <Card sx={sx}>
       <CardContent>
@@ -28,7 +28,7 @@ export const OverviewTotalCustomers = (props) => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Total Customers
+              Total traffic reach
             </Typography>
             <Typography variant="h4">{value}</Typography>
           </Stack>
@@ -44,24 +44,7 @@ export const OverviewTotalCustomers = (props) => {
             </SvgIcon>
           </Avatar>
         </Stack>
-        {difference && (
-          <Stack alignItems="center" direction="row" spacing={2} sx={{ mt: 2 }}>
-            <Stack alignItems="center" direction="row" spacing={0.5}>
-              <SvgIcon color={positive ? "success" : "error"} fontSize="small">
-                {positive ? <ArrowUpIcon /> : <ArrowDownIcon />}
-              </SvgIcon>
-              <Typography
-                color={positive ? "success.main" : "error.main"}
-                variant="body2"
-              >
-                {difference}%
-              </Typography>
-            </Stack>
-            <Typography color="text.secondary" variant="caption">
-              Since last month
-            </Typography>
-          </Stack>
-        )}
+        <h4>impressions per week</h4>
       </CardContent>
     </Card>
   );

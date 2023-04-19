@@ -12,7 +12,7 @@ import {
 export const OverviewTotalProfit = (props) => {
   let { value, sx } = props;
   //maybe will need to connect to sth , not just a number
-  value = -42142;
+  value = "$123,000";
   return (
     <Card sx={sx}>
       <CardContent>
@@ -24,9 +24,10 @@ export const OverviewTotalProfit = (props) => {
         >
           <Stack spacing={1}>
             <Typography color="text.secondary" variant="overline">
-              Total Profit
+              Total Cost Estimate
             </Typography>
             <Typography variant="h4">{value}</Typography>
+            <h6 className="italic">per week </h6>
           </Stack>
           <Avatar
             sx={{
