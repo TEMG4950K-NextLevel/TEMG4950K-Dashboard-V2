@@ -33,6 +33,24 @@ const IntegerStep: React.FC = () => {
   );
 };
 
+const InputOnly: React.FC = () => {
+  const [inputValue, setInputValue] = useState(0);
+  const onChange = (value: number) => {
+    if (isNaN(value)) {
+      return;
+    }
+    setInputValue(value);
+  };
+
+  return (
+    <Row>
+      <Col span={12}>
+        <InputNumber value={inputValue} onChange={onChange} />
+      </Col>
+    </Row>
+  );
+};
+
 const DecimalStep: React.FC = () => {
   const [inputValue, setInputValue] = useState(0);
 
@@ -68,41 +86,55 @@ const DecimalStep: React.FC = () => {
   );
 };
 
-const RangeForm: React.FC = () => (
-  <div className="flex flex-col gap-2">
-    <Space
-      style={{ width: "100%" }}
-      direction="vertical"
-      className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
-    >
-      <div>Income range (HKD$)</div>
-      <IntegerStep />
-      <IntegerStep />
-    </Space>
+const RangeForm = ({ handleClick }) => {
+  return (
+    <div className="flex flex-col gap-2">
+      <Space
+        style={{ width: "100%" }}
+        direction="vertical"
+        className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
+      >
+        <div>Income range (HKD$)</div>
+        <IntegerStep />
+        <IntegerStep />
+      </Space>
 
-    <Space
-      style={{ width: "100%" }}
-      direction="vertical"
-      className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
-    >
-      <div>Age range</div>
-      <IntegerStep />
-      <IntegerStep />
-    </Space>
+      <Space
+        style={{ width: "100%" }}
+        direction="vertical"
+        className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
+      >
+        <div>Age range</div>
+        <IntegerStep />
+        <IntegerStep />
+      </Space>
 
-    <Space
-      style={{ width: "100%" }}
-      direction="vertical"
-      className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
-    >
-      <div>Gender ratio</div>
-      <DecimalStep />
-    </Space>
+      <Space
+        style={{ width: "100%" }}
+        direction="vertical"
+        className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
+      >
+        <div>Gender ratio</div>
+        <DecimalStep />
+      </Space>
 
-    <button className="rounded-full bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] py-3">
-      Get recommendation
-    </button>
-  </div>
-);
+      <Space
+        style={{ width: "100%" }}
+        direction="vertical"
+        className="rounded-xl bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] px-4 py-3"
+      >
+        <div>Expected Budget</div>
+        <InputOnly />
+      </Space>
+
+      <button
+        onClick={handleClick}
+        className="rounded-full bg-gray-800 shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] py-3"
+      >
+        Get recommendation
+      </button>
+    </div>
+  );
+};
 
 export default RangeForm;

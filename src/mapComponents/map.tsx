@@ -32,7 +32,7 @@ import CITIES from "./cities.json";
 const TOKEN =
   "pk.eyJ1Ijoic29rdTE3IiwiYSI6ImNsZ2pjb3F2dDBtNWgzY212N21oMTR6dzkifQ.lPPlfpBi6oq78d8-_Gm0cA"; // Set your mapbox token here
 
-export default function Map({ isToggled, data }) {
+export default function Map({ isClicked, isToggled, data }) {
   const [popupInfo, setPopupInfo] = useState(null);
   const [intensity, setIntensity] = useState(0.1);
   const [radius, setRadius] = useState(11);
@@ -131,7 +131,6 @@ export default function Map({ isToggled, data }) {
     []
   );
 
-
   return (
     <Box
       className="shadow-[rgba(0,_0,_0,_0.35)_0px_4px_7px] z-10 mt-1"
@@ -225,7 +224,7 @@ export default function Map({ isToggled, data }) {
             </Source>
           ))}
         <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" />
-        {pins}
+        {isClicked && pins}
 
         {popupInfo && (
           <Popup
@@ -234,15 +233,7 @@ export default function Map({ isToggled, data }) {
             latitude={Number(popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}
           >
-            <div>
-              {popupInfo.city}, {popupInfo.state} |{" "}
-              <a
-                target="_new"
-                href={`http://en.wikipedia.org/w/index.php?title=Special:Search&search=${popupInfo.city}, ${popupInfo.state}`}
-              >
-                Wikipedia
-              </a>
-            </div>
+            <div color="black">estimated</div>
             {/* <img width="100%" src={popupInfo.image} /> */}
             <Image src={revenue} width="200" height="200" alt="revenue" />
             <Image src={impression} width="200" height="200" alt="impression" />

@@ -14,7 +14,6 @@ import RightBar from "../components/RightBar";
 import Map from "../mapComponents/Map";
 import TimeSliders from "../components/TimeSliders";
 
-
 function filterFeaturesByDay(featureCollection, time) {
   const date = new Date(time);
   const year = date.getFullYear();
@@ -47,6 +46,12 @@ export default function App() {
   const [enabled, setEnabled] = useState(true);
   const [isToggled, setIsToggled] = useState(false);
 
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleClick = () => {
+    setIsClicked(!isClicked);
+    console.log("isclicked");
+  };
 
   // TODO: get it back
   const handleToggleClick = () => {
@@ -60,9 +65,9 @@ export default function App() {
 
   useEffect(() => {
     /* global fetch */
-    fetch('https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson')
-      .then(resp => resp.json())
-      .then(json => {
+    fetch("https://docs.mapbox.com/mapbox-gl-js/assets/earthquakes.geojson")
+      .then((resp) => resp.json())
+      .then((json) => {
         // Note: In a real application you would do a validation of JSON data before doing anything with it,
         // but for demonstration purposes we ingore this part here and just trying to select needed data...
         const features = json.features;
@@ -73,11 +78,13 @@ export default function App() {
         setEarthQuakes(json);
         selectTime(endTime);
       })
-      .catch(err => console.error('Could not load data', err)); // eslint-disable-line
+      .catch((err) => console.error("Could not load data", err)); // eslint-disable-line
   }, []);
 
   const data = useMemo(() => {
-    return allDays ? earthquakes : filterFeaturesByDay(earthquakes, selectedTime);
+    return allDays
+      ? earthquakes
+      : filterFeaturesByDay(earthquakes, selectedTime);
   }, [earthquakes, allDays, selectedTime]);
 
   return (
@@ -120,8 +127,8 @@ export default function App() {
               }}
             >
               {/* data, timeRange, selectedTime, allDays, selectTime, useAllDays */}
-              <Map data={data} />
-              <RightBar />
+              <Map data={data} isClicked={isClicked} />
+              <RightBar handleClick={handleClick} />
             </Box>
             <Box sx={{ display: "flex", height: "30%" }}>
               <TimeSliders

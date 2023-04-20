@@ -15,10 +15,14 @@ const LeftBar = () => {
         <Sidebar.Items>
           <Sidebar.ItemGroup>
             <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Sidebar.Collapse icon={HiChartPie} label="Dashboard">
-                {/* adding more options. */}
-                <Sidebar.Item href="#">Heatmap</Sidebar.Item>
-              </Sidebar.Collapse>
+              {/* <Sidebar.Collapse icon={HiChartPie} label="Dashboard">
+                 adding more options. 
+                <Sidebar.Item href="/">Heatmap</Sidebar.Item>
+              </Sidebar.Collapse> */}
+
+              <Sidebar.Item href="/" icon={HiViewBoards}>
+                Dashboard
+              </Sidebar.Item>
             </div>
 
             <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
