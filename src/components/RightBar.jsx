@@ -22,12 +22,12 @@ const plans = [
 
 const labels = ["Mon", "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"];
 
-const RightBar = () => {
+const RightBar = ({ handleClick }) => {
   const [selected, setSelected] = useState(plans[0]);
   let [categories] = useState({
     Heatmaps: [{}, {}],
     Parameters: [{}, {}],
-    "Metrics": [{}, {}],
+    Metrics: [{}, {}],
   });
   return (
     <div
@@ -117,7 +117,7 @@ const RightBar = () => {
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              <Form />
+              <Form handleClick={handleClick} />
             </Tab.Panel>
             <Tab.Panel>
               <div className="flex flex-col mt-2 gap-y-4 box-border ">

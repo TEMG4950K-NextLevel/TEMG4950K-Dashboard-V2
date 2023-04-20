@@ -45,6 +45,7 @@ function ReportComponent() {
         "& .MuiDataGrid-cell:hover": {
           color: "white",
         },
+        maxWidth: "calc(100vw - 256px)",
       }}
       rows={rows}
       columns={columns}
