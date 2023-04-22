@@ -6,6 +6,10 @@ Integration with Flask-restplus, Flask-Cors, Flask-Testing, Flask-SQLalchemy,and
 
 ## Installation
 
+Virtual Environments
+
+https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+
 Install with pip:
 
 ```
