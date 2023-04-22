@@ -1,5 +1,3 @@
-import Map from "./Map";
-
 import { useState, useEffect } from "react";
 
 //child of Map
