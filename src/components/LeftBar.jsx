@@ -1,7 +1,12 @@
 import { Sidebar } from "flowbite-react";
 import { HiChartPie, HiViewBoards } from "react-icons/hi";
 
-const LeftBar = () => {
+
+
+const LeftBar = ({handleModalOpen,handleLaunchOpen}) => {
+
+
+
   return (
     <div
       className="bg-slate-800 shadow-inner"
@@ -26,9 +31,11 @@ const LeftBar = () => {
             </div>
 
             <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
-              <Sidebar.Item href="/report" icon={HiViewBoards}>
-                Report
-              </Sidebar.Item>
+              <Sidebar.Collapse icon={HiChartPie} label="Campaign">
+                <Sidebar.Item className="hover:cursor-pointer" onClick={handleLaunchOpen}>Launch</Sidebar.Item>
+                <Sidebar.Item className="hover:cursor-pointer" onClick={handleModalOpen}>Setting</Sidebar.Item>
+                <Sidebar.Item href="/evaluation">Evaluation </Sidebar.Item>
+              </Sidebar.Collapse> 
             </div>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
