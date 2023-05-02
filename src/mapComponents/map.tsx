@@ -142,8 +142,8 @@ export default function Map({ isClicked, isToggled, data }) {
         onClick={handleMapClick}
         onContextMenu={handleRightClick}
         initialViewState={{
-          latitude: 40,
-          longitude: -100,
+          latitude: 22.3193,
+          longitude: 114.1694,
           zoom: 3.5,
           bearing: 0,
           pitch: 0,
