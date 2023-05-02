@@ -76,33 +76,35 @@ export default function LaunchModal({launchIsOpen,onClose}){
         <>
           <Modal
             show={launchIsOpen}
-            size="xl"
+            size="2xl"
             popup={true}
             onClose={onClose}
           >
             <Modal.Header />
             <Modal.Body>
 
-              <div className=" space-y-6 px-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
-                <h3 className="text-2xl font-medium text-gray-900 dark:text-white ">
+              <div className="space-y-6 pb-4 sm:pb-6 lg:px-8 xl:pb-8">
+                <h3 className="text-4xl font-medium text-gray-900 dark:text-white ">
                   Launch Campaign
                 </h3>
               </div>
+              <hr className="mb-8"/>
     
-                <div className="flex flex-col space-y-4">
+                <div className="flex flex-col space-y-4 place-content-center px-6">
                     <Label className="text-xl" value="Brand Info"/>
 
-                    <div className="flex flex-row space-x-3 ml-7">
-                        <Label className="text-lg" value="Campaign Name"/>
+                    <div className="flex flex-row space-x-3 ml-7 items-center">
+                        <Label className="text-lg w-32" value="Campaign Name"/>
                         <TextInput
                         id="campaign-name"
                         placeholder="Adidas waterproof jacket"
                         required={true}
+                        className="w-48"
                         />
                     </div>
 
-                    <div className="flex flex-row space-x-3 ml-7">
-                        <Label className="text-lg" value="Billing Account" />
+                    <div className="flex flex-row space-x-3 ml-7 items-center">
+                        <Label className="text-lg w-32" value="Billing Account" />
                         <Select
                             id="billing-account"
                             required={true}
@@ -119,19 +121,19 @@ export default function LaunchModal({launchIsOpen,onClose}){
 
 
                     <Label className="text-xl" value="Campaign Settings" />
-                    <div className="flex flex-row space-x-3 ml-7">
-                        <Label className="text-lg" value="End Date" />
+                    <div className="flex flex-row space-x-3 ml-7 items-center">
+                        <Label className="text-lg w-24" value="End Date" />
                         <Datepicker options={startOptions} onChange={handleChange} value={selectedDate} show={show} setShow={handleClose} /> 
                     </div>
         
             
-                    <div className="flex flex-row space-x-3 ml-7">
-                        <Label className="text-lg" value="End Date" />
+                    <div className="flex flex-row space-x-3 ml-7 items-center">
+                        <Label className="text-lg w-24" value="End Date" />
                         <Datepicker options={endOptions} onChange={handleChange} value={selectedDate} show={show} setShow={handleClose} /> 
                     </div>
 
-                    <div className="flex flex-row space-x-3 ml-7">
-                        <Label className="text-lg" value="Budget Cap" />
+                    <div className="flex flex-row space-x-3 ml-7 items-center">
+                        <Label className="text-lg w-24" value="Budget Cap" />
                         <TextInput
                         id="budget-cap"
                         placeholder="$100,000"

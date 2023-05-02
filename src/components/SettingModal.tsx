@@ -17,6 +17,8 @@ export default function SettingModal({ modalIsopen, onClose }) {
             </h3>
           </div>
 
+          <hr className="mb-8" />
+
           <div className="flex flex-row place-content-center mt-4 mb-10">
             {/* left  */}
             <div className="flex flex-col space-y-4">
@@ -77,7 +79,7 @@ export default function SettingModal({ modalIsopen, onClose }) {
             {/* right side */}
             <div className="flex flex-col mx-3 space-y-4 ml-[100px]">
               <Label className="self-center" value="Extra triggers " />
-              
+
               {/* 1: WEATHER */}
               <div
                 id="selectweather"
@@ -90,35 +92,30 @@ export default function SettingModal({ modalIsopen, onClose }) {
                 </Select>
               </div>
 
-
-
-
-              
               <div id="selectdaytime" className="flex flex-col gap-y-3">
                 <Label value="Day and Time" />
 
-                  <div className="flex flex-row items-center gap-3">
-                    <Radio
-                      id="everyday"
-                      name="day"
-                      value="everyday"
-                      defaultChecked={true}
-                      className="mr-2"
-                    />
-                    <Label className="w-20" value="Every day " />
-                    <TextInput
-                      id="min-time"
-                      placeholder="11:00"
-                      required={true}
-                    />
-                    <Label value="to" />
-                    <TextInput
-                      id="max-time"
-                      placeholder="13:00"
-                      required={true}
-                    />
-                  </div>
-
+                <div className="flex flex-row items-center gap-3">
+                  <Radio
+                    id="everyday"
+                    name="day"
+                    value="everyday"
+                    defaultChecked={true}
+                    className="mr-2"
+                  />
+                  <Label className="w-20" value="Every day " />
+                  <TextInput
+                    id="min-time"
+                    placeholder="11:00"
+                    required={true}
+                  />
+                  <Label value="to" />
+                  <TextInput
+                    id="max-time"
+                    placeholder="13:00"
+                    required={true}
+                  />
+                </div>
 
                 <div className="flex flex-row-reverse">
                   <Button className="grow-0 w-[200px] ">
@@ -135,7 +132,7 @@ export default function SettingModal({ modalIsopen, onClose }) {
                     defaultChecked={false}
                     className="mr-2 self-start mt-3.5"
                   />
-                  
+
                   <div className="flex flex-col gap-y-3">
                     <div className="flex flex-row items-center gap-3">
                       <Label className="w-20" value="Weekday" />
