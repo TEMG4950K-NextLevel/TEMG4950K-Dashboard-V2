@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/mapComponents/Map.tsx", "src/components/TimeSliders.jsx", "src/components/LaunchModal.tsx"  ],
+, "src/mapComponents/Map.tsx", "src/components/TimeSliders.jsx", "src/components/LaunchModal.tsx", "src/mapComponents/draw-control.tss"  ],
   "exclude": [
     "node_modules"
   ]
