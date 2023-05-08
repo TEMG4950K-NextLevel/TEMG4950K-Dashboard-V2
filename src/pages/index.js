@@ -13,6 +13,9 @@ import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
 import Map from "../mapComponents/Map";
 import TimeSliders from "../components/TimeSliders";
+import SettingModal from "../components/SettingModal";
+import LaunchModal from "../components/LaunchModal";
+
 
 function filterFeaturesByDay(featureCollection, time) {
   const date = new Date(time);
@@ -47,6 +50,20 @@ export default function App() {
   const [isToggled, setIsToggled] = useState(false);
 
   const [isClicked, setIsClicked] = useState(false);
+
+  const [modalIsOpen,setModalIsOpen]=useState(false);
+  const [launchIsOpen,setLaunchIsOpen]=useState(false);
+
+
+  const handleLaunchOpen = ()=>{
+    setLaunchIsOpen(true);
+    console.log("clicked");
+  }
+
+  const handleModalOpen = ()=>{
+    setModalIsOpen(true);
+    console.log("clicked");
+  }
 
   const handleClick = () => {
     setIsClicked(!isClicked);
@@ -97,6 +114,7 @@ export default function App() {
           rel="stylesheet"
         />
       </Head>
+      {/* global box */}
       <Box
         className="bg-slate-800"
         sx={{
@@ -105,6 +123,8 @@ export default function App() {
           flexDirection: "column",
         }}
       >
+        <SettingModal modalIsopen={modalIsOpen} onClose={()=>setModalIsOpen(false)}/>
+        <LaunchModal launchIsOpen={launchIsOpen} onClose={()=>setLaunchIsOpen(false)}/>
         <TopNav />
         <Box
           sx={{
@@ -112,7 +132,7 @@ export default function App() {
             maxHeight: "calc(100% - 64px)",
           }}
         >
-          <LeftBar />
+          <LeftBar handleModalOpen={handleModalOpen} handleLaunchOpen={handleLaunchOpen}/>
           {/* Map page, hide if report page */}
           <Box
             sx={{ display: "flex", flexDirection: "column", height: "100%" }}
@@ -127,6 +147,7 @@ export default function App() {
               }}
             >
               {/* data, timeRange, selectedTime, allDays, selectTime, useAllDays */}
+          
               <Map data={data} isClicked={isClicked} />
               <RightBar handleClick={handleClick} />
             </Box>

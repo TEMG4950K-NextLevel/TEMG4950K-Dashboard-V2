@@ -1,10 +1,12 @@
 import * as React from "react";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import GeocoderControl from "./geocoder-control";
 import { Slider } from "antd";
 import { Box } from "@mui/system";
+
+import DrawControl from "./draw-control";
 
 import ContextMenu from "./context-menu";
 import Image from "next/image";
@@ -33,6 +35,28 @@ const TOKEN =
   "pk.eyJ1Ijoic29rdTE3IiwiYSI6ImNsZ2pjb3F2dDBtNWgzY212N21oMTR6dzkifQ.lPPlfpBi6oq78d8-_Gm0cA"; // Set your mapbox token here
 
 export default function Map({ isClicked, isToggled, data }) {
+  const [features, setFeatures] = useState({});
+
+  const onUpdate = useCallback((e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
+      for (const f of e.features) {
+        newFeatures[f.id] = f;
+      }
+      return newFeatures;
+    });
+  }, []);
+
+  const onDelete = useCallback((e) => {
+    setFeatures((currFeatures) => {
+      const newFeatures = { ...currFeatures };
+      for (const f of e.features) {
+        delete newFeatures[f.id];
+      }
+      return newFeatures;
+    });
+  }, []);
+
   const [popupInfo, setPopupInfo] = useState(null);
   const [intensity, setIntensity] = useState(0.1);
   const [radius, setRadius] = useState(11);
@@ -142,8 +166,8 @@ export default function Map({ isClicked, isToggled, data }) {
         onClick={handleMapClick}
         onContextMenu={handleRightClick}
         initialViewState={{
-          latitude: 40,
-          longitude: -100,
+          latitude: 22.3193,
+          longitude: 114.1694,
           zoom: 3.5,
           bearing: 0,
           pitch: 0,
@@ -151,6 +175,19 @@ export default function Map({ isClicked, isToggled, data }) {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={TOKEN}
       >
+        <DrawControl
+          position="top-left"
+          displayControlsDefault={false}
+          controls={{
+            polygon: true,
+            trash: true,
+          }}
+          defaultMode="draw_polygon"
+          onCreate={onUpdate}
+          onUpdate={onUpdate}
+          onDelete={onDelete}
+        />
+
         {clicked && (
           <ContextMenu
             x={points.x}
