@@ -16,6 +16,8 @@ import Image from "next/image";
 // hardcoded images
 import impression from "./impression.jpeg";
 import revenue from "./revenue.jpeg";
+import male from "./male.jpeg";
+import female from './female.jpeg';
 
 import MapGL, {
   Source,
@@ -37,7 +39,7 @@ import CITIES from "./cities.json";
 const TOKEN =
   "pk.eyJ1Ijoic29rdTE3IiwiYSI6ImNsZ2pjb3F2dDBtNWgzY212N21oMTR6dzkifQ.lPPlfpBi6oq78d8-_Gm0cA"; // Set your mapbox token here
 
-export default function Map({ isClicked, isToggled, data }) {
+export default function Map({ selectedTime ,isClicked, isToggled ,data}) {
   const [features, setFeatures] = useState({});
 
   const onUpdate = useCallback((e) => {
@@ -90,11 +92,7 @@ export default function Map({ isClicked, isToggled, data }) {
       x: event.point.x,
       y: event.point.y,
     });
-    console.log(
-      "Right Click",
-      event.originalEvent.pageX,
-      event.originalEvent.pageY
-    );
+ 
   };
 
   useEffect(() => {
@@ -112,6 +110,8 @@ export default function Map({ isClicked, isToggled, data }) {
 
     const longitude = event.lngLat["lng"];
     const latitude = event.lngLat["lat"];
+  
+    
     if (!isNaN(longitude) && !isNaN(latitude)) {
       const newMarkerCoords = {
         longitude,
@@ -169,7 +169,7 @@ export default function Map({ isClicked, isToggled, data }) {
         initialViewState={{
           latitude: 22.3193,
           longitude: 114.1694,
-          zoom: 3.5,
+          zoom: 9,
           bearing: 0,
           pitch: 0,
         }}
@@ -210,6 +210,12 @@ export default function Map({ isClicked, isToggled, data }) {
             key={index}
             longitude={coords.longitude}
             latitude={coords.latitude}
+            onClick={(e) => {
+              // If we let the click event propagates to the map, it will immediately close the popup
+              // with `closeOnClick: true`
+              e.originalEvent.stopPropagation();
+              setPopupInfo(city);
+            }}
           >
             <Billboard />
             <button
@@ -264,9 +270,26 @@ export default function Map({ isClicked, isToggled, data }) {
                 }}
               />
             </Source>
-          ))}
+          
         <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" />
-        {isClicked && pins}
+        {pins}
+
+        <Marker
+          key={`marker-top`}
+          longitude={114.16944105056365}
+          latitude={22.320593420763686}
+          anchor="bottom"
+          onClick={(e) => {
+            // If we let the click event propagates to the map, it will immediately close the popup
+            // with `closeOnClick: true`
+            e.originalEvent.stopPropagation();
+            setPopupInfo({"city":"New York","population":"8,175,133","image":"http://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Above_Gotham.jpg/240px-Above_Gotham.jpg",
+            "state":"New York","latitude":22.3206,"longitude":114.1694},);
+          }}
+        >
+          <Billboard />
+        </Marker>
+
 
         {popupInfo && (
           <Popup
@@ -275,10 +298,9 @@ export default function Map({ isClicked, isToggled, data }) {
             latitude={Number(popupInfo.latitude)}
             onClose={() => setPopupInfo(null)}
           >
-            <div color="black">estimated</div>
             {/* <img width="100%" src={popupInfo.image} /> */}
-            <Image src={revenue} width="200" height="200" alt="revenue" />
-            <Image src={impression} width="200" height="200" alt="impression" />
+            {(selectedTime<3)&& <Image src={male} width="200" height="200" alt="male" />}
+            {(selectedTime>=3)&&<Image src={female} width="200" height="200" alt="female" />}
           </Popup>
         )}
       </MapGL>

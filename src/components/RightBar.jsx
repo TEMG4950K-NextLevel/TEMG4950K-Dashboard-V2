@@ -124,20 +124,20 @@ const RightBar = ({ handleClick }) => {
                 <Chart
                   dataLabel={"Cost by day"}
                   labels={labels}
-                  title="Total cost estimate"
-                  value="$120,421"
+                  title="Conversion rate"
+                  value="20%"
                 />
                 <Chart
-                  dataLabel={"Impressions by day"}
+                  dataLabel={"Estimated impression"}
                   labels={labels}
                   title="Total traffic reached"
                   value="124,643"
                 />
                 <Chart
-                  dataLabel={"Correlation by day"}
+                  dataLabel={"On-target reach"}
                   labels={labels}
-                  title="Overall correlation"
-                  value="0.62"
+                  title="On-target reach"
+                  value="70%"
                 />
               </div>
             </Tab.Panel>
