@@ -37,9 +37,28 @@ def report():
     return res
 
 @app.route("/test")
-# @cross_origin()
 def test():
     return {"members": ["John", "Paul", "George", "Ringo"]}
+
+@app.route("/eval")
+def eval(ne, sw, bigQueryProjectId='bigquery-public-data', recordLimit=1000):
+    datasetId = 'new_york'
+    tableName = 'tlc_yellow_trips_2016'
+
+    queryString = 'SELECT pickup_latitude, pickup_longitude '
+    queryString +=  'FROM `' + bigQueryProjectId +'.' + datasetId + '.' + tableName + '`'
+    queryString += ' WHERE pickup_latitude > ' + sw.lat()
+    queryString += ' AND pickup_latitude < ' + ne.lat()
+    queryString += ' AND pickup_longitude > ' + sw.lng()
+    queryString += ' AND pickup_longitude < ' + ne.lng()
+    queryString += ' LIMIT ' + recordLimit
+    
+    query_job = enqueue_query(queryString)
+    if query_job.error_result:
+        return query_job.error_result
+    
+    # todo
+
 
 def enqueue_query(sql_query):
     query_job = client.query(sql_query)
