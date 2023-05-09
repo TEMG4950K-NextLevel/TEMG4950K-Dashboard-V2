@@ -1,3 +1,5 @@
+// most of the features in this file were referenced from 
+// https://visgl.github.io/react-map-gl/examples
 import * as React from "react";
 import { useState, useMemo, useEffect, useCallback } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
@@ -31,6 +33,7 @@ import { heatmapLayer } from "./map-style";
 import { Billboard } from "./pin";
 import CITIES from "./cities.json";
 
+// token is NOT linked with any billing account
 const TOKEN =
   "pk.eyJ1Ijoic29rdTE3IiwiYSI6ImNsZ2pjb3F2dDBtNWgzY212N21oMTR6dzkifQ.lPPlfpBi6oq78d8-_Gm0cA"; // Set your mapbox token here
 
@@ -62,8 +65,6 @@ export default function Map({ isClicked, isToggled, data }) {
   const [radius, setRadius] = useState(11);
   const [markerCoords, setMarkerCoords] = useState([]);
 
-  // current clicking event (left click = add ,click delete = delete)
-  //TODOS: right click trigger page , and add or delete by left click.
   const [clicked, setClicked] = useState(false);
   const [points, setPoints] = useState({
     x: 0,
@@ -175,6 +176,8 @@ export default function Map({ isClicked, isToggled, data }) {
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={TOKEN}
       >
+
+        {/* draw geofence ref code: https://visgl.github.io/react-map-gl/examples/draw-polygon */}
         <DrawControl
           position="top-left"
           displayControlsDefault={false}
@@ -201,6 +204,7 @@ export default function Map({ isClicked, isToggled, data }) {
         <NavigationControl position="top-left" />
         <ScaleControl />
 
+          {/* markers ref code: https://visgl.github.io/react-map-gl/examples/controls */}
         {markerCoords.map((coords, index) => (
           <Marker
             key={index}
@@ -219,6 +223,7 @@ export default function Map({ isClicked, isToggled, data }) {
           </Marker>
         ))}
 
+        {/* heatmap ref code: https://visgl.github.io/react-map-gl/examples/heatmap */}
         {isToggled ||
           (data && (
             <Source type="geojson" data={data}>
