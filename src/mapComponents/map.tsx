@@ -270,6 +270,7 @@ export default function Map({ selectedTime ,isClicked, isToggled ,data}) {
                 }}
               />
             </Source>
+          ))}
           
         <GeocoderControl mapboxAccessToken={TOKEN} position="top-left" />
         {pins}
@@ -279,7 +280,7 @@ export default function Map({ selectedTime ,isClicked, isToggled ,data}) {
           longitude={114.16944105056365}
           latitude={22.320593420763686}
           anchor="bottom"
-          onClick={(e) => {
+          onClick={(e) => { 
             // If we let the click event propagates to the map, it will immediately close the popup
             // with `closeOnClick: true`
             e.originalEvent.stopPropagation();
