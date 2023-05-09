@@ -111,26 +111,24 @@ const fakeMarkHours = {
 
 function TotalFootTraffic(props) {
   const [radius, setRadius] = useState(0);
+ 
 
   const {
-    startTime,
-    endTime,
-    onChangeTime,
+    setSelectedTime,
     allDays,
-    onChangeAllDays,
-    selectedTime,
+    onChangeAllDays
   } = props;
 
-  const day = 24 * 60 * 60 * 1000;
-  const days = Math.round((endTime - startTime) / day);
-  const selectedDay = Math.round((selectedTime - startTime) / day);
+  // const day = 24 * 60 * 60 * 1000;
+  // const days = Math.round((endTime - startTime) / day);
+  // const selectedDay = Math.round((selectedTime - startTime) / day);
 
-  const onSelectDay = (evt) => {
-    const daysToAdd = evt;
-    // add selected days to start time to calculate new time
-    const newTime = startTime + daysToAdd * day;
-    onChangeTime(newTime);
-  };
+  // const onSelectDay = (evt) => {
+  //   const daysToAdd = evt;
+  //   // add selected days to start time to calculate new time
+  //   const newTime = startTime + daysToAdd * day;
+  //   onChangeTime(newTime);
+  // };
 
   return (
     <div
@@ -161,6 +159,8 @@ function TotalFootTraffic(props) {
             }}
             tooltipVisible={false}
             onChange={(value) => {
+              console.log(value);
+              setSelectedTime(value);
               setRadius(value);
             }}
           />
@@ -178,8 +178,8 @@ function TotalFootTraffic(props) {
         </div>
         <div className="w-[90%] bg-gray-800 rounded-[30px] px-10 shadow-[rgba(0,_0,_0,_0.24)_0px_3px_8px]">
           <Slider
-            max={days}
-            value={selectedDay}
+            max={1}
+            value={1}
             disabled={allDays}
             step={1}
             trackStyle={{
